@@ -27,7 +27,8 @@ clean_lib() {
 for i in 1 2 3
 do
     for fn in "$dest/lib/"*.dylib "$dest/lib/couchdb/bin/couchjs" \
-	"$dest/lib/couchdb/erlang/lib/"couch-*/priv/lib/couch_icu_driver.so
+	"$dest/lib/couchdb/erlang/lib/"couch-*/priv/lib/couch_icu_driver.so \
+    "$dest/lib/erlang/lib/crypto-2.1/priv/lib/"crypto.so
     do
 	otool -L "$fn" | egrep -v "^[/a-z]" | grep -v /usr/lib \
             | sed -e 's/(\(.*\))//g' | clean_lib "$fn"
