@@ -10,10 +10,13 @@ clean_lib() {
     while read something
     do
         base=${something##*/}
-        echo "  Fixing $something -> lib/$base"
-        test -f "$dest/lib/$base" || cp "$something" "$dest/lib/$base"
-        chmod 755 "$dest/lib/$base"
-        install_name_tool -change "$something" "lib/$base" "$1"
+
+        if [ $base != "LDAP" ] && [ $base != "Cocoa" ] && [ $base != "CoreFoundation" ] && [ $base != "ExceptionHandling" ]; then
+            echo "  Fixing $something -> lib/$base"
+            test -f "$dest/lib/$base" || cp "$something" "$dest/lib/$base"
+            chmod 755 "$dest/lib/$base"
+            install_name_tool -change "$something" "lib/$base" "$1"
+        fi
     done
 }
 

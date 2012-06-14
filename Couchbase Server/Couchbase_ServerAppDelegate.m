@@ -3,10 +3,6 @@
  *  This is Apache 2.0 licensed free software
  */
 #import "Couchbase_ServerAppDelegate.h"
-//#import "ImportController.h"
-//#import "Sparkle/Sparkle.h"
-//#import "SUUpdaterDelegate.h"
-
 #import "iniparser.h"
 
 @implementation Couchbase_ServerAppDelegate
@@ -23,9 +19,6 @@
 
 -(void)applicationWillFinishLaunching:(NSNotification *)notification
 {
-//	SUUpdater *updater = [SUUpdater sharedUpdater];
-//	SUUpdaterDelegate *updaterDelegate = [[SUUpdaterDelegate alloc] init];
-//	[updater setDelegate: updaterDelegate];
 }
 
 - (IBAction)showAboutPanel:(id)sender {
@@ -46,16 +39,19 @@
 
 -(void)ensureFullCommit
 {
+    // determine data dir
+	NSString *dataDir = [self applicationSupportFolder];
+
 	// find couch.uri file
 	NSMutableString *urifile = [[NSMutableString alloc] init];
-	[urifile appendString: [task currentDirectoryPath]]; // couchdbx-core
+	[urifile appendString: dataDir]; // couchdbx-core
 	[urifile appendString: @"/var/run/couchdb/couch.uri"];
     
 	// get couch uri
 	NSString *uri = [NSString stringWithContentsOfFile:urifile encoding:NSUTF8StringEncoding error:NULL];
     
 	// TODO: maybe parse out \n
-    
+
 	// get database dir
 	NSString *databaseDir = [self applicationSupportFolder];
     
@@ -110,10 +106,10 @@
 {
     hasSeenStart = NO;
 
-    logPath = [[self logFilePath:@"Couchdb.log"] retain];
+    logPath = [[self logFilePath:@"couchdb.log"] retain];
     const char *logPathC = [logPath cStringUsingEncoding:NSUTF8StringEncoding];
 
-    NSString *oldLogFileString = [self logFilePath:@"Couchdb.log.old"];
+    NSString *oldLogFileString = [self logFilePath:@"couchdb.log.old"];
     const char *oldLogPath = [oldLogFileString cStringUsingEncoding:NSUTF8StringEncoding];
     rename(logPathC, oldLogPath); // This will fail the first time.
 
@@ -121,8 +117,8 @@
     logFile = fopen(logPathC, "w");
 
     [NSTimer scheduledTimerWithTimeInterval:1.0
-                                     target:self selector:@selector(flushLog)
-                                   userInfo:nil
+                                    target:self selector:@selector(flushLog)
+                                    userInfo:nil
                                     repeats:YES];
 
     [[NSUserDefaults standardUserDefaults]
@@ -161,12 +157,8 @@
 
     [launchBrowserItem setState:([defaults boolForKey:@"browseAtStart"] ? NSOnState : NSOffState)];
     [self updateAddItemButtonState];
-    
+  
 	[self launchCouchDB];
-    
-//    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"runImport"]) {
-//        [self showImportWindow:nil];
-//    }
 }
 
 -(IBAction)start:(id)sender
@@ -205,18 +197,39 @@
 }
 
 - (NSString *)applicationSupportFolder {
-    return [self applicationSupportFolder:@"CouchDBServer"];
+    return [self applicationSupportFolder:@"CouchDB"];
 }
 
 -(void)setInitParams
 {
 	// determine data dir
 	NSString *dataDir = [self applicationSupportFolder];
+    
+    // database and views dir
+    NSString *dbDir = [dataDir stringByAppendingString:@"/var/lib/couchdb"];
+
 	// create if it doesn't exist
 	if(![[NSFileManager defaultManager] fileExistsAtPath:dataDir]) {
 		[[NSFileManager defaultManager] createDirectoryAtPath:dataDir withIntermediateDirectories:YES attributes:nil error:NULL];
 	}
 
+    // config dir
+    NSString *confDir = [dataDir stringByAppendingString:@"/etc/couchdb"];
+    
+	// create if it doesn't exist
+	if(![[NSFileManager defaultManager] fileExistsAtPath:confDir]) {
+		[[NSFileManager defaultManager] createDirectoryAtPath:confDir withIntermediateDirectories:YES attributes:nil error:NULL];
+        
+        // remove old file, if any
+        [[NSFileManager defaultManager] removeItemAtPath: [self finalConfigPath] error: NULL];
+        
+        // create sym link to local.ini
+        NSString *localIni = [confDir stringByAppendingString:@"/local.ini"];
+        if ([[NSFileManager defaultManager] createFileAtPath:localIni contents:nil attributes:nil]) {
+            [[NSFileManager defaultManager] createSymbolicLinkAtPath: [self finalConfigPath] withDestinationPath: localIni error: NULL];
+        }
+	}
+    
     dictionary* iniDict = iniparser_load([[self finalConfigPath] UTF8String]);
     if (iniDict == NULL) {
         iniDict = dictionary_new(0);
@@ -225,28 +238,48 @@
 
     dictionary_set(iniDict, "couchdb", NULL);
     if (iniparser_getstring(iniDict, "couchdb:database_dir", NULL) == NULL) {
-        dictionary_set(iniDict, "couchdb:database_dir", [dataDir UTF8String]);
+        dictionary_set(iniDict, "couchdb:database_dir", [dbDir UTF8String]);
     }
     if (iniparser_getstring(iniDict, "couchdb:view_index_dir", NULL) == NULL) {
-        dictionary_set(iniDict, "couchdb:view_index_dir", [dataDir UTF8String]);
+        dictionary_set(iniDict, "couchdb:view_index_dir", [dbDir UTF8String]);
     }
+    
+    // uri dir
+    NSString *runDir = [dataDir stringByAppendingString:@"/var/run/couchdb"];
+    
+	// create if it doesn't exist
+	if(![[NSFileManager defaultManager] fileExistsAtPath:runDir]) {
+		[[NSFileManager defaultManager] createDirectoryAtPath:runDir withIntermediateDirectories:YES attributes:nil error:NULL];
+	}
+    NSString *uriFile = [runDir stringByAppendingString:@"/couch.uri"];
+    dictionary_set(iniDict, "couchdb:uri_file", [uriFile UTF8String]);
     
     dictionary_set(iniDict, "query_servers", NULL);
     dictionary_set(iniDict, "query_servers:javascript", "bin/couchjs share/couchdb/server/main.js");
     dictionary_set(iniDict, "query_servers:coffeescript", "bin/couchjs share/couchdb/server/main-coffee.js");
 
+    // full log file
+    NSString *logDir = [dataDir stringByAppendingString:@"/var/log/couchdb"];
+
+    // create if it doesn't exist
+	if(![[NSFileManager defaultManager] fileExistsAtPath:logDir]) {
+		[[NSFileManager defaultManager] createDirectoryAtPath:logDir withIntermediateDirectories:YES attributes:nil error:NULL];
+	}
+
+    NSString *fullLogFile = [logDir stringByAppendingString:@"/couch.log"];
+    dictionary_set(iniDict, "log", NULL);
+    dictionary_set(iniDict, "log:file", [fullLogFile UTF8String]);
+        
     dictionary_set(iniDict, "product", NULL);
     NSString *vstr = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
     dictionary_set(iniDict, "product:title", [vstr UTF8String]);
 
-    NSString *tmpfile = [NSString stringWithFormat:@"%@.tmp", [self finalConfigPath]];
-    FILE *f = fopen([tmpfile UTF8String], "w");
+    FILE *f = fopen([[self finalConfigPath] UTF8String], "w");
     if (f) {
         iniparser_dump_ini(iniDict, f);
         fclose(f);
-        rename([tmpfile UTF8String], [[self finalConfigPath] UTF8String]);
     } else {
-        NSLog(@"Can't write to temporary config file:  %@:  %s\n", tmpfile, strerror(errno));
+        NSLog(@"Can't write to config file:  %@:  %s\n", [self finalConfigPath], strerror(errno));
     }
 
     iniparser_freedict(iniDict);
@@ -316,10 +349,7 @@
         }
     }
     
-    [NSTimer scheduledTimerWithTimeInterval:1.0
-                                     target:self selector:@selector(launchCouchDB)
-                                   userInfo:nil
-                                    repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(launchCouchDB) userInfo:nil repeats:NO];
 }
 
 -(void)cleanup

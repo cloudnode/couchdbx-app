@@ -115,6 +115,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		45041425158361AC0040F6FF /* CouchDB Server.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "CouchDB Server.entitlements"; sourceTree = SOURCE_ROOT; };
 		45759BA6156817930003334D /* CouchDb.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = CouchDb.icns; sourceTree = "<group>"; };
 		45759BA7156818370003334D /* CouchDb-Status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CouchDb-Status.png"; sourceTree = "<group>"; };
 		45759BA8156818F20003334D /* CouchDb-Status-bw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CouchDb-Status-bw.png"; sourceTree = "<group>"; };
@@ -224,6 +225,7 @@
 		DA1AD33D133DA58D00E6A9E1 /* CouchDB Server */ = {
 			isa = PBXGroup;
 			children = (
+				45041425158361AC0040F6FF /* CouchDB Server.entitlements */,
 				DAADFB0B133DA68B00B282D6 /* LoginItemManager.h */,
 				DAADFB0C133DA68B00B282D6 /* LoginItemManager.m */,
 				DAADFB0D133DA68B00B282D6 /* ImportableDatabase.h */,
@@ -503,7 +505,7 @@
 		DA1AD363133DA58D00E6A9E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = i386;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -512,7 +514,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -521,13 +523,13 @@
 		DA1AD364133DA58D00E6A9E1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = i386;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -536,6 +538,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "CouchDB Server.entitlements";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -555,6 +558,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "CouchDB Server.entitlements";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
