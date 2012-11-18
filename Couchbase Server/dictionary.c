@@ -97,7 +97,7 @@ unsigned dictionary_hash(char * key)
 	unsigned	hash ;
 	int			i ;
 
-	len = strlen(key);
+	len = (int)strlen(key);
 	for (hash=0, i=0 ; i<len ; i++) {
 		hash += (unsigned)key[i] ;
 		hash += (hash<<10);
@@ -232,7 +232,7 @@ int dictionary_set(dictionary * d, const char * key, const char * val)
 	if (d==NULL || key==NULL) return -1 ;
 	
 	/* Compute hash for this key */
-	hash = dictionary_hash(key) ;
+	hash = dictionary_hash((char*)key) ;
 	/* Find if value is already in dictionary */
 	if (d->n>0) {
 		for (i=0 ; i<d->size ; i++) {
@@ -243,7 +243,7 @@ int dictionary_set(dictionary * d, const char * key, const char * val)
 					/* Found a value: modify and return */
 					if (d->val[i]!=NULL)
 						free(d->val[i]);
-                    d->val[i] = val ? xstrdup(val) : NULL ;
+                    d->val[i] = val ? xstrdup((char*)val) : NULL ;
                     /* Value has been modified: return */
 					return 0 ;
 				}
@@ -274,8 +274,8 @@ int dictionary_set(dictionary * d, const char * key, const char * val)
         }
     }
 	/* Copy key */
-	d->key[i]  = xstrdup(key);
-    d->val[i]  = val ? xstrdup(val) : NULL ;
+	d->key[i]  = xstrdup((char*)key);
+    d->val[i]  = val ? xstrdup((char*)val) : NULL ;
 	d->hash[i] = hash;
 	d->n ++ ;
 	return 0 ;
