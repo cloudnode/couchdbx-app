@@ -6,11 +6,9 @@ Run [build-couchdb](https://github.com/cloudnode/build-couchdb) to do a fully au
 
 ### Downloads
 
-Github does not allow hosting of binary files anymore. The [old download page](https://github.com/cloudnode/couchdbx-app/downloads) with CouchDB version 1.2 is still up.
-
-Newer builds are available from our Gitweb site.
- 
 See [Downloads](http://gitweb.cloudno.de/downloads/) for a pre-compiled CouchDB 1.2.1 version for Mac OS X.
+
+The [old download page](https://github.com/cloudnode/couchdbx-app/downloads) with the earlier CouchDB version 1.2 is still up.
 
 ### Install
 
