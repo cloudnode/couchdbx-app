@@ -10,7 +10,7 @@ Github does not allow hosting of binary files anymore. The [old download page](h
 
 Newer builds are available from our Gitweb site.
  
-See [Downloads](https://gitweb.cloudno.de/downloads) for a pre-compiled CouchDB 1.2.1 version for Mac OS X.
+See [Downloads](http://gitweb.cloudno.de/downloads) for a pre-compiled CouchDB 1.2.1 version for Mac OS X.
 
 ### Install
 
