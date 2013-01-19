@@ -18,7 +18,7 @@
 # %CopyrightEnd%
 #
 ROOTDIR=`pwd`/lib/erlang
-BINDIR=$ROOTDIR/erts-5.9/bin
+BINDIR=$ROOTDIR/erts-5.9.3.1/bin
 EMU=beam
 PROGNAME=`echo $0 | sed 's/.*\///'`
 export EMU

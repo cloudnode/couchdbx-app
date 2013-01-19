@@ -257,7 +257,7 @@
     dictionary_set(iniDict, "query_servers", NULL);
     dictionary_set(iniDict, "query_servers:javascript", "bin/couchjs share/couchdb/server/main.js");
     dictionary_set(iniDict, "query_servers:coffeescript", "bin/couchjs share/couchdb/server/main-coffee.js");
-
+    
     // full log file
     NSString *logDir = [dataDir stringByAppendingString:@"/var/log/couchdb"];
 
@@ -272,8 +272,16 @@
         
     dictionary_set(iniDict, "product", NULL);
     NSString *vstr = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
-    dictionary_set(iniDict, "product:title", [vstr UTF8String]);
+    //dictionary_set(iniDict, "product:title", [vstr UTF8String]);
 
+    // additional overrides for 1.3.0 pre
+    NSString *utilDriverDir = [@"lib/couchdb/erlang/lib/couch-" stringByAppendingString:vstr];
+    dictionary_set(iniDict, "couchdb:util_driver_dir", [[utilDriverDir stringByAppendingString:@"/priv/lib"] UTF8String]);
+    dictionary_set(iniDict, "couchdb:index_dir", [dbDir UTF8String]);
+    dictionary_set(iniDict, "httpd_global_handlers", NULL);
+    dictionary_set(iniDict, "httpd_global_handlers:_utils", "{couch_httpd_misc_handlers, handle_utils_dir_req, \"share/couchdb/www\"}");
+    dictionary_set(iniDict, "httpd_global_handlers:favicon.ico", "{couch_httpd_misc_handlers, handle_favicon_req, \"share/couchdb/www\"}");
+    
     FILE *f = fopen([[self finalConfigPath] UTF8String], "w");
     if (f) {
         iniparser_dump_ini(iniDict, f);

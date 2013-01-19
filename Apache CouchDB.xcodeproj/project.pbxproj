@@ -45,9 +45,8 @@
 		DAADFB15133DA68B00B282D6 /* ImportController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAADFB10133DA68B00B282D6 /* ImportController.m */; };
 		DAADFB28133DA75F00B282D6 /* bin in Install Core */ = {isa = PBXBuildFile; fileRef = DAADFB1D133DA75F00B282D6 /* bin */; };
 		DAADFB29133DA75F00B282D6 /* env.sh in Install Core */ = {isa = PBXBuildFile; fileRef = DAADFB1E133DA75F00B282D6 /* env.sh */; };
-		DAADFB2A133DA75F00B282D6 /* etc in Install Core */ = {isa = PBXBuildFile; fileRef = DAADFB1F133DA75F00B282D6 /* etc */; };
-		DAADFB2D133DA75F00B282D6 /* lib in Install Core */ = {isa = PBXBuildFile; fileRef = DAADFB22133DA75F00B282D6 /* lib */; };
-		DAADFB2E133DA75F00B282D6 /* Library in Install Core */ = {isa = PBXBuildFile; fileRef = DAADFB23133DA75F00B282D6 /* Library */; };
+		DAADFB2D133DA75F00B282D6 /* etc in Install Core */ = {isa = PBXBuildFile; fileRef = DAADFB22133DA75F00B282D6 /* etc */; };
+		DAADFB2E133DA75F00B282D6 /* lib in Install Core */ = {isa = PBXBuildFile; fileRef = DAADFB23133DA75F00B282D6 /* lib */; };
 		DAADFB30133DA75F00B282D6 /* sbin in Install Core */ = {isa = PBXBuildFile; fileRef = DAADFB25133DA75F00B282D6 /* sbin */; };
 		DAADFB31133DA75F00B282D6 /* share in Install Core */ = {isa = PBXBuildFile; fileRef = DAADFB26133DA75F00B282D6 /* share */; };
 		DAADFB32133DA75F00B282D6 /* var in Install Core */ = {isa = PBXBuildFile; fileRef = DAADFB27133DA75F00B282D6 /* var */; };
@@ -91,9 +90,8 @@
 			files = (
 				DAADFB28133DA75F00B282D6 /* bin in Install Core */,
 				DAADFB29133DA75F00B282D6 /* env.sh in Install Core */,
-				DAADFB2A133DA75F00B282D6 /* etc in Install Core */,
-				DAADFB2D133DA75F00B282D6 /* lib in Install Core */,
-				DAADFB2E133DA75F00B282D6 /* Library in Install Core */,
+				DAADFB2D133DA75F00B282D6 /* etc in Install Core */,
+				DAADFB2E133DA75F00B282D6 /* lib in Install Core */,
 				DAADFB30133DA75F00B282D6 /* sbin in Install Core */,
 				DAADFB31133DA75F00B282D6 /* share in Install Core */,
 				DAADFB32133DA75F00B282D6 /* var in Install Core */,
@@ -151,14 +149,13 @@
 		DAADFB0E133DA68B00B282D6 /* ImportableDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportableDatabase.m; sourceTree = "<group>"; };
 		DAADFB0F133DA68B00B282D6 /* ImportController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportController.h; sourceTree = "<group>"; };
 		DAADFB10133DA68B00B282D6 /* ImportController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportController.m; sourceTree = "<group>"; };
-		DAADFB1D133DA75F00B282D6 /* bin */ = {isa = PBXFileReference; lastKnownFileType = folder; name = bin; path = ../../build/bin; sourceTree = "<group>"; };
-		DAADFB1E133DA75F00B282D6 /* env.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = env.sh; path = ../../build/env.sh; sourceTree = "<group>"; };
-		DAADFB1F133DA75F00B282D6 /* etc */ = {isa = PBXFileReference; lastKnownFileType = folder; name = etc; path = ../../build/etc; sourceTree = "<group>"; };
-		DAADFB22133DA75F00B282D6 /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lib; path = ../../build/lib; sourceTree = "<group>"; };
-		DAADFB23133DA75F00B282D6 /* Library */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Library; path = ../../build/Library; sourceTree = "<group>"; };
-		DAADFB25133DA75F00B282D6 /* sbin */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sbin; path = ../../build/sbin; sourceTree = "<group>"; };
-		DAADFB26133DA75F00B282D6 /* share */ = {isa = PBXFileReference; lastKnownFileType = folder; name = share; path = ../../build/share; sourceTree = "<group>"; };
-		DAADFB27133DA75F00B282D6 /* var */ = {isa = PBXFileReference; lastKnownFileType = folder; name = var; path = ../../build/var; sourceTree = "<group>"; };
+		DAADFB1D133DA75F00B282D6 /* bin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bin; sourceTree = "<group>"; };
+		DAADFB1E133DA75F00B282D6 /* env.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = env.sh; sourceTree = "<group>"; };
+		DAADFB22133DA75F00B282D6 /* etc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = etc; sourceTree = "<group>"; };
+		DAADFB23133DA75F00B282D6 /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; path = lib; sourceTree = "<group>"; };
+		DAADFB25133DA75F00B282D6 /* sbin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sbin; sourceTree = "<group>"; };
+		DAADFB26133DA75F00B282D6 /* share */ = {isa = PBXFileReference; lastKnownFileType = folder; path = share; sourceTree = "<group>"; };
+		DAADFB27133DA75F00B282D6 /* var */ = {isa = PBXFileReference; lastKnownFileType = folder; path = var; sourceTree = "<group>"; };
 		DAADFB37133DA84400B282D6 /* erl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = erl; sourceTree = "<group>"; };
 		DAADFB38133DA84400B282D6 /* fix-paths.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "fix-paths.sh"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -291,15 +288,15 @@
 			children = (
 				DAADFB1D133DA75F00B282D6 /* bin */,
 				DAADFB1E133DA75F00B282D6 /* env.sh */,
-				DAADFB1F133DA75F00B282D6 /* etc */,
-				DAADFB22133DA75F00B282D6 /* lib */,
-				DAADFB23133DA75F00B282D6 /* Library */,
+				DAADFB22133DA75F00B282D6 /* etc */,
+				DAADFB23133DA75F00B282D6 /* lib */,
 				DAADFB25133DA75F00B282D6 /* sbin */,
 				DAADFB26133DA75F00B282D6 /* share */,
 				DAADFB27133DA75F00B282D6 /* var */,
 			);
 			name = "Core Files";
-			sourceTree = "<group>";
+			path = "../build-couchdb-1.2.1/build";
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 

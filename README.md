@@ -1,10 +1,16 @@
-## CouchDB 1.2.0 Application Wrapper for Mac OS X
+## CouchDB 1.2.1 Application Wrapper for Mac OS X
 
 ### Build Instructions
 
-Run [build-couchdb](https://github.com/iriscouch/build-couchdb) to do a fully automated build of the recent CouchDB 1.2.0 version. Copy the resulting 'build' folder into your home directory as ~/build. Lauch Xcode and build this app.
+Run [build-couchdb](https://github.com/cloudnode/build-couchdb) to do a fully automated build of the recent CouchDB 1.2.1 version. Copy the resulting 'build' folder into your home directory as ~/build. Launch Xcode and build this app.
 
-See [Downloads](https://github.com/cloudnode/couchdbx-app/downloads) for a pre-compiled CouchDB 1.2.0 version for Mac OS X.
+### Downloads
+
+Github does not allow hosting of binary files anymore. The [old download page](https://github.com/cloudnode/couchdbx-app/downloads) with CouchDB version 1.2 is still up.
+
+Newer builds are available from our Gitweb site.
+ 
+See [Downloads](https://gitweb.cloudno.de/downloads) for a pre-compiled CouchDB 1.2.1 version for Mac OS X.
 
 ### Install
 

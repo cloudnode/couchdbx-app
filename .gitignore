@@ -5,3 +5,5 @@
 /cb.plist
 project.xcworkspace
 xcuserdata
+/dist*
+/*.log
