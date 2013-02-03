@@ -6,7 +6,8 @@ Run [build-couchdb](https://github.com/cloudnode/build-couchdb) to do a fully au
 
 ### Downloads
 
-See [Downloads](http://gitweb.cloudno.de/downloads/) for a pre-compiled CouchDB 1.2.1 version for Mac OS X.
+See [Downloads](http://gitweb.cloudno.de/downloads/) for a pre-compiled CouchDB 1.2.1 version for Mac OS X 10.8.x. 
+(This build does not work on earlier versions of OS X due to a bug in the build chain (See: http://openradar.appspot.com/11022559)) 
 
 The [old download page](https://github.com/cloudnode/couchdbx-app/downloads) with the earlier CouchDB version 1.2 is still up.
 
